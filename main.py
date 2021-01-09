@@ -1,5 +1,12 @@
 import pygame
 
+class keyLight():
+    def __init__(self, keyValue):
+        keyLight.key = keyValue
+
+
+
+
 
 def main():
     pygame.init()
@@ -19,17 +26,22 @@ def main():
     pygame.display.flip()
     # Create main loop variable and game loop
     running = True
+    keyDown = False
     while running:
         for event in pygame.event.get():
             if event.type == pygame.KEYDOWN:
                 # if event.key == pygame.K_a:
                 #     hue = (hue + 5) % 360
                 # if event.key == pygame.K_0:
-                hue = (hue - .5) % 360
+                keyDown = True
+            if event.type == pygame.KEYUP:
+                keyDown = False
             color.hsla = (hue, sat, lumin, alpha)
             screen.fill(color)
             if event.type == pygame.QUIT:
                 running = False
+        if keyDown:
+            hue = (hue - .07) % 360
         pygame.display.update()
 
 
